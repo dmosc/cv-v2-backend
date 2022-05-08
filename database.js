@@ -1,13 +1,11 @@
 const mysql = require("mysql");
 const fs = require("fs");
+const {databaseKeys} = require("./environment");
 
-// docker run -p 3306:3306 --name nodejs-mysql -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=eshop -d mysql:5.7
-const getDatabase = () => {
+// docker run -p 3306:3306 --name nodejs-mysql -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=personal_cv -d mysql:5.7
+const getDatabase = (database = "") => {
   return mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "password",
-    database: 'personal_cv',
+    ...databaseKeys,
     multipleStatements: true
   });
 };
